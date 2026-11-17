@@ -13,6 +13,8 @@ class Roboter:
     def start(self):
         self.motoren.gerade_fahren(600)
         print(self.farbsensor.get_rgb())
+        while(True):
+            print(self.gyroskop.get_distance())
 
     
     def stop(self):
