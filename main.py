@@ -16,11 +16,12 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 from funktionen import *
 from scan import *
 from fahren import *
+import roboter
 
 
 # Hier wird die angeschlossene Hardware definiert und konfiguriert
 ev3 = EV3Brick()
-sensor_touch = TouchSensor(Port.S1) # Beispiel für Touch-Sensor an Port S3
+"""sensor_touch = TouchSensor(Port.S1) # Beispiel für Touch-Sensor an Port S3
 motor_links = Motor(Port.B)
 motor_rechts = Motor(Port.A)
 #sensor_gyroskop = GyroSensor(Port.S2)
@@ -28,14 +29,13 @@ sensor_farbe = ColorSensor(Port.S2)
 sensor_ultraschall = UltrasonicSensor(Port.S4)
 #motor_marke = Motor(Port.B)
 
-#Fahren(ev3, sensor_touch)
+#Fahren(ev3, sensor_touch)"""
+
+roboter = roboter.Roboter
+roboter.start()
 
 # Ab hier beginnt der eigentliche Programmablauf
-#piep(ev3, sensor_touch)
-#rotor(ev3, motor_marke)
-#motor_marke.run(300)
-abstand = abstand_cm(sensor_ultraschall)
+""" abstand = abstand_cm(sensor_ultraschall)
 ev3.screen.print(str(abstand) + "cm")
-start_durch_klappe(sensor_ultraschall, motor_links, motor_rechts, sensor_touch, sensor_farbe)
-
-fahren(ev3, sensor_touch, sensor_farbe, motor_links, motor_rechts)
+start(sensor_ultraschall, motor_links, motor_rechts, sensor_touch, sensor_farbe)
+fahren(ev3, sensor_touch, sensor_farbe, motor_links, motor_rechts) """
