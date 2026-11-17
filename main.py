@@ -15,7 +15,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 # Hier können Dateien mit eigenen Funktionen importiert werden
 from funktionen import *
 from scan import *
-from fahren import *
+#from fahren import *
 import roboter
 
 
@@ -31,7 +31,7 @@ sensor_ultraschall = UltrasonicSensor(Port.S4)
 
 #Fahren(ev3, sensor_touch)"""
 
-roboter = roboter.Roboter
+roboter = roboter.Roboter()
 roboter.start()
 
 # Ab hier beginnt der eigentliche Programmablauf

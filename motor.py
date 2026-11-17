@@ -13,9 +13,6 @@ class Motoren:
         
         # while not sensor_touch.pressed() and sensor_farbe.color() == Color.BLACK:
         #    wait(10)
-        
-        self.motor_l.stop()
-        self.motor_r.stop()
 
 class MotorMarkierung:
     def __init__(self):

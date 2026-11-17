@@ -3,16 +3,16 @@ import motor
 
 class Roboter:
     def __init__(self):
-        self.touchsensor = sensor.TouchSensor
-        self.farbsensor = sensor.Farbsensor
-        self.gyroskop = sensor.GyroSensor
-        self.ultraschall = sensor.UltrasonicSensor
-        self.motoren = motor.Motoren
-        self.motormarkierung = motor.MotorMarkierung
+        self.touchsensor = sensor.Lanzensensor()
+        self.farbsensor = sensor.Farbsensor()
+        self.gyroskop = sensor.Gyroskop()
+        self.ultraschall = sensor.Ultraschall()
+        self.motoren = motor.Motoren()
+        self.motormarkierung = motor.MotorMarkierung()
 
     def start(self):
         self.motoren.gerade_fahren(600)
-        self.abstand = self.ultraschall.distance()
+        print(self.farbsensor.get_rgb())
 
     
     def stop(self):

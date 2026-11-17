@@ -7,5 +7,5 @@ def abstand_cm(sensor_ultraschall):
 
 def Farbwert(sensor_farbe,sensor_touch):
     while not sensor_touch.pressed():
-        print(sensor_farbe.color())
+        return(sensor_farbe.rgb())
     
