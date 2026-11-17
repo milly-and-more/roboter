@@ -3,13 +3,19 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.media.ev3dev import SoundFile, ImageFile
 
 def fahren(ev3, sensor_touch, sensor_farbe, motor_links, motor_rechts):
-    while (not sensor_touch.pressed()):
-        motor_links.run(600)
+U = sensor.farbe.rgb()
+x = bool(True)
+    while (not sensor_touch.pressed() and x):
+        motor_links.run(600)           #Fahrtkorrektur ergänzen
         motor_rechts.run(600)
-        x = sensor_farbe.color()
-        if (x != sensor_farbe.color(BLACK)):
-            return
+        F = sensor_farbe.rgb()
+        rs =                           #Werte für schwarz ergänzen
+        gs = 
+        bs = 
+        while ([F0]>rs or [F1]>gs or [F2]>bs ):
+            pass
         else:
+            x = bool(false)
             break
     else:
         motor_links.Stop
