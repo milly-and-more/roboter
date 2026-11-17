@@ -19,11 +19,15 @@ class Gyroskop:
     def __init__(self):
         self.gyroskop = GyroSensor(Port.S3)
 
-    def get_distance(self):
-        return self.gyroskop.distance()
+    def get_speed(self):
+        return self.gyroskop.speed()
+        
+    def get_angle(self):
+        return self.gyroskop.angle()
 
 class Ultraschall:
     def __init__(self):
         self.ultraschall =  UltrasonicSensor(Port.S4)
-
+    def get_distance(self):
+        return self.Ultraschall.distance()
 

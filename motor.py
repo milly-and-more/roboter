@@ -14,6 +14,9 @@ class Motoren:
         # while not sensor_touch.pressed() and sensor_farbe.color() == Color.BLACK:
         #    wait(10)
 
+    def drehen(slef, angle:deg):
+            self.motor_l.run(speed)
+            self.motor_r.run(-speed)
 class MotorMarkierung:
     def __init__(self):
         self.motor = Motor(Port.C)
