@@ -19,7 +19,7 @@ class Motoren:
         self.motor_r.run(speed_r)
 
     def links_drehen(self, speed):
-        self.motor_l.run(-speed)
+        self.motor_l.run(speed*2)
         self.motor_r.run(speed)
 
     def beide_stop(self):
@@ -29,3 +29,8 @@ class Motoren:
 class MotorMarkierung:
     def __init__(self):
         self.motor = Motor(Port.C)
+    
+    def abwurf(self):
+        self.motor(500)
+        wait (2000)
+        self.motor.stop()

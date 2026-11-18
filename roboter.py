@@ -2,6 +2,8 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import sensor
 import motor
+from pybricks.tools import wait, StopWatch, DataLog
+from pybricks.media.ev3dev import SoundFile, ImageFile
 
 class Roboter:
     GRUND_GESCHWINDIGKEIT = 600
@@ -51,7 +53,8 @@ class Roboter:
             print("Winkel Drehung: " + str(angle))
             wait(10)
             angle = self.gyroskop.get_angle()
-        self.motoren.beide_stop()
-        self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
-        wait(self.GERADAUS_NACH_DREHUNG_MSEC)
-        self.motoren.beide_stop()
+        self.bewegen()
+
+
+    def stop(self):
+        doof = []

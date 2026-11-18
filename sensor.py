@@ -6,7 +6,11 @@ class Lanzensensor:
     def __init__(self):
         self.touchsensor = TouchSensor(Port.S1)
 
+<<<<<<< Updated upstream
     def pressed(self):
+=======
+    def lanzbruch(self):
+>>>>>>> Stashed changes
         return self.touchsensor.pressed()
 
 class Farbsensor:
@@ -15,6 +19,10 @@ class Farbsensor:
 
     def get_rgb(self):
         return self.farbsensor.rgb()
+
+    def get_tages_rgb(self):
+        global tagesrgb
+        tagesrgb = self.farbsensor.rgb()
 
 class Gyroskop:
     def __init__(self):
