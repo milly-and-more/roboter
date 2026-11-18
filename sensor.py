@@ -6,6 +6,9 @@ class Lanzensensor:
     def __init__(self):
         self.touchsensor = TouchSensor(Port.S1)
 
+    def pressed(self):
+        return self.touchsensor.pressed()
+
 class Farbsensor:
     def __init__(self):
         self.farbsensor = ColorSensor(Port.S2)
@@ -27,6 +30,7 @@ class Gyroskop:
         self.gyroskop.reset_angle(angle)
 
 class Ultraschall:
+    PERFEKTE_DISTANZ = 75
     def __init__(self):
         self.ultraschall =  UltrasonicSensor(Port.S4)
     
@@ -34,9 +38,8 @@ class Ultraschall:
         return self.ultraschall.distance()
 
     def distanz_wand_kontrolle(self):
-        """Return relative value actual distance vs perfect distance"""
-        PERFEKTE_DISTANZ = 75
+        """Return the distance devition differenz from the target."""
         aktuelle_distanz = self.get_distance()
-        return aktuelle_distanz / PERFEKTE_DISTANZ
+        return aktuelle_distanz - self.PERFEKTE_DISTANZ
     
         
