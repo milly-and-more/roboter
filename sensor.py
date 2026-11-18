@@ -2,8 +2,6 @@ from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
 from pybricks.parameters import Port, Stop, Direction, Button, Color
 
-#hier sit ein code welcher das gyroskop verwendet
-
 class Lanzensensor:
     def __init__(self):
         self.touchsensor = TouchSensor(Port.S1)
@@ -28,6 +26,14 @@ class Gyroskop:
 class Ultraschall:
     def __init__(self):
         self.ultraschall =  UltrasonicSensor(Port.S4)
+    
     def get_distance(self):
         return self.Ultraschall.distance()
 
+    def distanz_wand_kontrolle(self):
+        """Return relative value actual distance vs perfect distance"""
+        PERFEKTE_DISTANZ = 75
+        aktuelle_distanz = self.get_distance()
+        return aktuelle_distanz / PERFEKTE_DISTANZ
+    
+        
