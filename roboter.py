@@ -1,3 +1,5 @@
+from pybricks.tools import wait, StopWatch, DataLog
+from pybricks.media.ev3dev import SoundFile, ImageFile
 import sensor
 import motor
 
@@ -30,15 +32,12 @@ class Roboter:
 
     def drehen(self):
         self.gyroskop.reset_angle(0)
-        self.motoren.links_drehen(self.GRUND_GESCHWINDIGKEIT / 4)
+        self.motoren.links_drehen(self.GRUND_GESCHWINDIGKEIT / 6)
         angle = self.gyroskop.get_angle()
-        while(angle > -90 | angle < 90): #falsches löschen
+        while abs(angle) < 90: #falsches löschen
             print("Winkel Drehung: " + angle)
             #Abchecken welche Werte ausgegeben werden bei counterclockwise drehung
             wait(2)
             angle = self.gyroskop.get_angle()
+        self.motoren.beide_stop()
         self.bewegen()
-
-
-    def stop(self):
-        doof = []

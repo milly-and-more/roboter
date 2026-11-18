@@ -19,8 +19,8 @@ class Motoren:
         self.motor_r.run(speed_r)
 
     def links_drehen(self, speed):
-        self.motor_l.run(-speed)
-        self.motor_r.run(speed)
+        self.motor_l.run(speed)
+        self.motor_r.run(-speed)
 
     def beide_stop(self):
         self.motor_l.stop()

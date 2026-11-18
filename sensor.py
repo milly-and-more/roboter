@@ -23,12 +23,15 @@ class Gyroskop:
     def get_angle(self):
         return self.gyroskop.angle()
 
+    def reset_angle(self, angle = 0):
+        self.gyroskop.reset_angle(angle)
+
 class Ultraschall:
     def __init__(self):
         self.ultraschall =  UltrasonicSensor(Port.S4)
     
     def get_distance(self):
-        return self.Ultraschall.distance()
+        return self.ultraschall.distance()
 
     def distanz_wand_kontrolle(self):
         """Return relative value actual distance vs perfect distance"""
