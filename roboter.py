@@ -32,7 +32,9 @@ class Roboter:
     def bewegen(self):
         while(True):
             #kontrolle ziel
-            self.farbsensor.recognize_fin()
+            if self.farbsensor.recognize_fin():
+                self.finish()
+                return
             wand_abstand = self.ultraschall.distanz_wand_kontrolle()
 
             if self.touchsensor.pressed():
@@ -60,7 +62,10 @@ class Roboter:
         zielwinkel = self.DREH_ZIELWINKEL + self.DREH_TOLERANZ
         while True:
             #kontrolle ziel
-            self.farbsensor.recognize_fin()
+            if self.farbsensor.recognize_fin():
+                self.finish()
+                return
+            
             verbleibender_winkel = zielwinkel - abs(angle)
             if verbleibender_winkel <= self.DREH_TOLERANZ:
                 break
@@ -80,3 +85,7 @@ class Roboter:
         print("Drehung abgeschlossen. Aktueller Winkel:", angle)
         self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 370)
         self.bewegen()
+
+    def finish(self):
+        self.motoren.beide_stop()
+        self.motoren.fahren_gerade_degree(200,40)
