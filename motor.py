@@ -1,3 +1,5 @@
+from turtle import speed
+
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
 from pybricks.parameters import Port, Stop, Direction, Button, Color
@@ -37,14 +39,16 @@ class Motoren:
         self.motor_r.brake()
 
     def fahren_gerade_degree(self, speed, degree):
-        self.motor_l.run_angle(speed, degree, then=Stop.HOLD, wait=True)
+        self.motor_l.run_angle(speed, degree, then=Stop.HOLD, wait=False)
         self.motor_r.run_angle(speed, degree, then=Stop.HOLD, wait=True)
+
+
+
 
 class MotorMarkierung:
     def __init__(self):
         self.motor = Motor(Port.C)
 
     def abwurf(self):
-        self.motor(500)
-        wait(2000)
+        self.motor.run_time(500, 2000)
         self.motor.stop()

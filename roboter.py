@@ -2,8 +2,6 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import sensor
 import motor
-from pybricks.tools import wait, StopWatch, DataLog
-
 
 class Roboter:
     GRUND_GESCHWINDIGKEIT = 300
@@ -34,14 +32,15 @@ class Roboter:
 
             if self.touchsensor.pressed():
                 self.motoren.beide_stop()
+                self.motoren.fahren_gerade_degree(300, -40)
                 self.drehen("rechts")
                 continue
             elif wand_abstand > 250:
                 self.motoren.beide_stop()
-                self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 545)
+                self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 250)
                 self.motoren.beide_stop()
-                print("Stopped")
-                break
+                self.drehen()
+                return
 
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
             korrektur = max(0.5, min(1.5, korrektur))
@@ -70,4 +69,6 @@ class Roboter:
             angle = self.gyroskop.get_angle()
         
         self.motoren.beide_stop()
-        self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
+        print("Drehung abgeschlossen. Aktueller Winkel:", angle)
+        self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 370)
+        self.bewegen()
