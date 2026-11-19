@@ -37,8 +37,8 @@ class Motoren:
         self.motor_r.brake()
 
     def fahren_degree(self, speed, degree):
-        self.motor_l.run_angle(speed, degree, then=Stop.hold)
-        self.motor_r.run_angle(speed, degree, then=Stop.hold)
+        self.motor_l.run_angle(speed, degree, then=Stop.HOLD, wait=True)
+        self.motor_r.run_angle(speed, degree, then=Stop.HOLD, wait=True)
 
 class MotorMarkierung:
     def __init__(self):
