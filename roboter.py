@@ -1,7 +1,8 @@
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import sensor
-import motor
+import motor    
+import asyncio
 
 class Roboter:
     GRUND_GESCHWINDIGKEIT = 300
@@ -24,12 +25,17 @@ class Roboter:
         self.motormarkierung = motor.MotorMarkierung()
 
     def start(self):
-        self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
-        print(self.farbsensor.get_rgb())
-        self.bewegen()
+        while not self.touchsensor.pressed():
+            wait(1)
+        self.drehen("rechts")
+
+    async def check_goal(self):
+        while True:
+            if self.farbsensor.get_rgb
 
     def bewegen(self):
         while(True):
+            #kontrolle ziel
             wand_abstand = self.ultraschall.distanz_wand_kontrolle()
 
             if self.touchsensor.pressed():
@@ -39,6 +45,7 @@ class Roboter:
                 self.drehen("rechts")
                 return
             elif wand_abstand > 250:
+                self.ritturns = 0
                 self.motoren.beide_stop()
                 self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 250)
                 self.motoren.beide_stop()
@@ -46,7 +53,7 @@ class Roboter:
                 return
             self.ritturns = 0
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
-            korrektur = max(0.5, min(1.5, korrektur))
+            korrektur = max(0.8, min(1.2, korrektur))
 
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
             self.motoren.korrigierendes_fahren(self.GRUND_GESCHWINDIGKEIT, rechte_geschwindigkeit)
@@ -56,6 +63,7 @@ class Roboter:
         angle = self.gyroskop.get_angle()
         zielwinkel = self.DREH_ZIELWINKEL + self.DREH_TOLERANZ
         while True:
+            #kontrolle ziel
             verbleibender_winkel = zielwinkel - abs(angle)
             if verbleibender_winkel <= self.DREH_TOLERANZ:
                 break
@@ -67,11 +75,11 @@ class Roboter:
                 self.motoren.rechts_drehen(geschwindigkeit)
             else:
                 self.motoren.links_drehen(geschwindigkeit)
-            wait(10)
             angle = self.gyroskop.get_angle()
+        
+        self.motoren.beide_stop()
         if self.ritturns == 2:
             self.motormarkierung.abwurf()
-        self.motoren.beide_stop()
         print("Drehung abgeschlossen. Aktueller Winkel:", angle)
         self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 370)
         self.bewegen()

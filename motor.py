@@ -48,5 +48,5 @@ class MotorMarkierung:
         self.motor = Motor(Port.C)
 
     def abwurf(self):
-        self.motor.run_time(900, 3500)
+        self.motor.run_time(900, 2250)
         self.motor.stop()

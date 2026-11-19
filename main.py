@@ -10,7 +10,7 @@ from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
 from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.media.ev3dev import SoundFile, ImageFile
-
+import motor
 
 # Hier können Dateien mit eigenen Funktionen importiert werden
 from funktionen import *
@@ -30,8 +30,10 @@ sensor_ultraschall = UltrasonicSensor(Port.S4)
 #motor_marke = Motor(Port.B)
 
 #Fahren(ev3, sensor_touch)"""
-
+#motormarkierung = motor.MotorMarkierung()
+#motormarkierung.abwurf()
 roboter = roboter.Roboter()
+EV3Brick().speaker.beep()
 roboter.start()
 #roboter.drehen("rechts")
 
