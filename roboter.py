@@ -52,7 +52,8 @@ class Roboter:
                 return
             self.ritturns = 0
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
-            korrektur = max(0.9, min(1.1, korrektur))
+            print("korrektur:", korrektur)
+            korrektur = max(0.7, min(1.3, korrektur))
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
             self.motoren.korrigierendes_fahren(self.GRUND_GESCHWINDIGKEIT, rechte_geschwindigkeit)
                 
