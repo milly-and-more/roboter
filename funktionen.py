@@ -22,4 +22,11 @@ def start_durch_klappe(sensor_ultraschall, motor_links, motor_rechts, sensor_tou
         wait(100)
     fahre_bis_stop(motor_links, motor_rechts, sensor_touch, sensor_farbe)    
 
-    
+    def recognize_fin(self):
+    rgb_momentan = sensoren.Farbsensor().get_rgb()
+    sum_rgb = (rgb_momentan[0]**2 + rgb_momentan[1]**2 + rgb_momentan[2]**2)**0.5
+    sum_s = 30
+    if  sum_rgb < sum_s:
+        return False
+    else:
+        return True
