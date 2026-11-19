@@ -52,7 +52,7 @@ class Roboter:
                 return
             self.ritturns = 0
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
-            korrektur = max(0.8, min(1.2, korrektur))
+            korrektur = max(0.9, min(1.1, korrektur))
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
             self.motoren.korrigierendes_fahren(self.GRUND_GESCHWINDIGKEIT, rechte_geschwindigkeit)
                 
@@ -74,7 +74,7 @@ class Roboter:
                 int(self.GRUND_GESCHWINDIGKEIT * verbleibender_winkel / self.DREH_ZIELWINKEL),
             )
             if richtung == "rechts":
-                self.motoren.rechts_drehen(geschwindigkeit)
+                self.motoren.rechts_drehen(50)
             else:
                 self.motoren.links_drehen(geschwindigkeit)
             angle = self.gyroskop.get_angle()

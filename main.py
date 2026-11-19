@@ -33,7 +33,7 @@ sensor_ultraschall = UltrasonicSensor(Port.S4)
 #motormarkierung = motor.MotorMarkierung()
 #motormarkierung.abwurf()
 roboter = roboter.Roboter()
-EV3Brick().speaker.beep()
+ev3.speaker.beep()
 roboter.start()
 #roboter.drehen("rechts")
 

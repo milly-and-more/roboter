@@ -23,7 +23,7 @@ class Farbsensor:
     def recognize_fin(self):
         rgb_momentan = self.get_rgb()
         sum_rgb = (rgb_momentan[0]**2 + rgb_momentan[1]**2 + rgb_momentan[2]**2)**0.5
-        sum_s = 10
+        sum_s = 15
         if  sum_rgb > sum_s:
             return False
         else:
