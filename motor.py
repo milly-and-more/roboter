@@ -28,6 +28,10 @@ class Motoren:
         self.motor_l.stop()
         self.motor_r.stop()
 
+    def beide_bremsen(self):
+        self.motor_l.brake()
+        self.motor_r.brake()
+        
 class MotorMarkierung:
     def __init__(self):
         self.motor = Motor(Port.C)

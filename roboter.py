@@ -10,6 +10,9 @@ class Roboter:
     KURVEN_ABSTANDS_VERHAELTNIS = 2.0
     MAX_GESCHWINDIGKEIT = 900
     GERADAUS_NACH_DREHUNG_MSEC = 800
+    DREH_ZIELWINKEL = 90
+    DREH_TOLERANZ = 1
+    DREH_MIN_GESCHWINDIGKEIT = 20
 
 
     def __init__(self):
@@ -29,8 +32,7 @@ class Roboter:
         while(True):
             wand_abstand = self.ultraschall.distanz_wand_kontrolle()
 
-            if(wand_abstand > self.ultraschall.PERFEKTE_DISTANZ):
-                print("Abzweigung erkannt")
+            if(wand_abstand > self.ultraschall.PERFEKTE_DISTANZ):      #Abzweigung erkannt
                 self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
                 while not self.touchsensor.pressed():
                     wait(10)
@@ -38,6 +40,7 @@ class Roboter:
                 self.drehen()
                 continue
 
+            korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
             korrektur = max(0.5, min(1.5, korrektur))
 
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
@@ -45,18 +48,20 @@ class Roboter:
             wait(10)
                 
     def drehen(self):
-        self.gyroskop.reset_angle(0)
-        self.motoren.links_drehen(int(self.GRUND_GESCHWINDIGKEIT / 6))
+        self.gyroskop.reset_angle()
         angle = self.gyroskop.get_angle()
-        while abs(angle) < 90:
-            print("Winkel Drehung: " + str(angle))
+        zielwinkel = self.DREH_ZIELWINKEL + self.DREH_TOLERANZ
+        while abs(angle) < zielwinkel:
+            verbleibender_winkel = zielwinkel - abs(angle)
+            geschwindigkeit = max(
+                self.DREH_MIN_GESCHWINDIGKEIT,
+                int(self.GRUND_GESCHWINDIGKEIT * verbleibender_winkel / self.DREH_ZIELWINKEL),
+            )
+            self.motoren.links_drehen(geschwindigkeit)
             wait(10)
             angle = self.gyroskop.get_angle()
+        
         self.motoren.beide_stop()
-        self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
-        wait(self.GERADAUS_NACH_DREHUNG_MSEC)
-        self.motoren.beide_stop()
-
         self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
         wait(self.GERADAUS_NACH_DREHUNG_MSEC)
         self.motoren.beide_stop()

@@ -6,11 +6,7 @@ class Lanzensensor:
     def __init__(self):
         self.touchsensor = TouchSensor(Port.S1)
 
-<<<<<<< Updated upstream
     def pressed(self):
-=======
-    def lanzbruch(self):
->>>>>>> Stashed changes
         return self.touchsensor.pressed()
 
 class Farbsensor:
@@ -34,8 +30,9 @@ class Gyroskop:
     def get_angle(self):
         return self.gyroskop.angle()
 
-    def reset_angle(self, angle = 0):
+    def reset_angle(self, angle=0):
         self.gyroskop.reset_angle(angle)
+    
 
 class Ultraschall:
     PERFEKTE_DISTANZ = 75
