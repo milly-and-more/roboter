@@ -12,6 +12,8 @@ class Roboter:
     DREH_TOLERANZ = 1
     DREH_MIN_GESCHWINDIGKEIT = 20
 
+    ritturns = 0
+
 
     def __init__(self):
         self.touchsensor = sensor.Lanzensensor()
@@ -31,23 +33,23 @@ class Roboter:
             wand_abstand = self.ultraschall.distanz_wand_kontrolle()
 
             if self.touchsensor.pressed():
+                self.ritturns += 1
                 self.motoren.beide_stop()
                 self.motoren.fahren_gerade_degree(300, -40)
                 self.drehen("rechts")
-                continue
+                return
             elif wand_abstand > 250:
                 self.motoren.beide_stop()
                 self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 250)
                 self.motoren.beide_stop()
                 self.drehen()
                 return
-
+            self.ritturns = 0
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
             korrektur = max(0.5, min(1.5, korrektur))
 
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
             self.motoren.korrigierendes_fahren(self.GRUND_GESCHWINDIGKEIT, rechte_geschwindigkeit)
-            wait(10)
                 
     def drehen(self, richtung = "links"):
         self.gyroskop.reset_angle()
@@ -67,7 +69,8 @@ class Roboter:
                 self.motoren.links_drehen(geschwindigkeit)
             wait(10)
             angle = self.gyroskop.get_angle()
-        
+        if self.ritturns == 2:
+            self.motormarkierung.abwurf()
         self.motoren.beide_stop()
         print("Drehung abgeschlossen. Aktueller Winkel:", angle)
         self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 370)
