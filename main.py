@@ -33,6 +33,7 @@ sensor_ultraschall = UltrasonicSensor(Port.S4)
 
 roboter = roboter.Roboter()
 roboter.start()
+#roboter.drehen("rechts")
 
 # Ab hier beginnt der eigentliche Programmablauf
 """ abstand = abstand_cm(sensor_ultraschall)

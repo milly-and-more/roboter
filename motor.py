@@ -24,14 +24,22 @@ class Motoren:
         self.motor_l.run(-speed)
         self.motor_r.run(speed)
 
+    def rechts_drehen(self, speed):
+        self.motor_l.run(speed)
+        self.motor_r.run(-speed)
+
     def beide_stop(self):
-        self.motor_l.stop()
-        self.motor_r.stop()
+        self.motor_l.hold()
+        self.motor_r.hold()
 
     def beide_bremsen(self):
         self.motor_l.brake()
         self.motor_r.brake()
-        
+
+    def fahren_degree(self, speed, degree):
+        self.motor_l.run_angle(speed, degree, then=Stop.hold)
+        self.motor_r.run_angle(speed, degree, then=Stop.hold)
+
 class MotorMarkierung:
     def __init__(self):
         self.motor = Motor(Port.C)
