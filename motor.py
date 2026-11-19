@@ -36,7 +36,7 @@ class Motoren:
         self.motor_l.brake()
         self.motor_r.brake()
 
-    def fahren_degree(self, speed, degree):
+    def fahren_gerade_degree(self, speed, degree):
         self.motor_l.run_angle(speed, degree, then=Stop.HOLD, wait=True)
         self.motor_r.run_angle(speed, degree, then=Stop.HOLD, wait=True)
 

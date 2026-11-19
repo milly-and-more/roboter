@@ -38,10 +38,10 @@ class Roboter:
                 continue
             elif wand_abstand > 250:
                 self.motoren.beide_stop()
-                self.motoren.fahren_degree(self.GRUND_GESCHWINDIGKEIT, 545)
-
-
-                return
+                self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 545)
+                self.motoren.beide_stop()
+                print("Stopped")
+                break
 
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
             korrektur = max(0.5, min(1.5, korrektur))
