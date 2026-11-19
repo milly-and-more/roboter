@@ -6,7 +6,11 @@ class Lanzensensor:
     def __init__(self):
         self.touchsensor = TouchSensor(Port.S1)
 
+<<<<<<< Updated upstream
     def pressed(self):
+=======
+    def lanzbruch(self):
+>>>>>>> Stashed changes
         return self.touchsensor.pressed()
 
 class Farbsensor:
