@@ -2,7 +2,6 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import sensor
 import motor    
-import asyncio
 
 class Roboter:
     GRUND_GESCHWINDIGKEIT = 300
@@ -29,13 +28,11 @@ class Roboter:
             wait(1)
         self.drehen("rechts")
 
-    async def check_goal(self):
-        while True:
-            if self.farbsensor.get_rgb
 
     def bewegen(self):
         while(True):
             #kontrolle ziel
+            self.farbsensor.recognize_fin()
             wand_abstand = self.ultraschall.distanz_wand_kontrolle()
 
             if self.touchsensor.pressed():
@@ -54,7 +51,6 @@ class Roboter:
             self.ritturns = 0
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
             korrektur = max(0.8, min(1.2, korrektur))
-
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
             self.motoren.korrigierendes_fahren(self.GRUND_GESCHWINDIGKEIT, rechte_geschwindigkeit)
                 
@@ -64,6 +60,7 @@ class Roboter:
         zielwinkel = self.DREH_ZIELWINKEL + self.DREH_TOLERANZ
         while True:
             #kontrolle ziel
+            self.farbsensor.recognize_fin()
             verbleibender_winkel = zielwinkel - abs(angle)
             if verbleibender_winkel <= self.DREH_TOLERANZ:
                 break

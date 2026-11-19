@@ -20,6 +20,18 @@ class Farbsensor:
         global tagesrgb
         tagesrgb = self.farbsensor.rgb()
 
+    def recognize_fin(self):
+        rgb_momentan = self.get_rgb()
+        sum_rgb = (rgb_momentan[0]**2 + rgb_momentan[1]**2 + rgb_momentan[2]**2)**0.5
+        sum_s = 10
+        if  sum_rgb > sum_s:
+            return False
+        else:
+            print("finish" + str(sum_rgb))
+            return True
+
+    
+
 class Gyroskop:
     def __init__(self):
         self.gyroskop = GyroSensor(Port.S3)
