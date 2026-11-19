@@ -11,10 +11,14 @@ class Lanzensensor:
 
 class Farbsensor:
     def __init__(self):
-        self.farbsensor = ColorSensor(Port.S2)
+        self.farbsensor = ColorSensor(Port.S2)  
 
     def get_rgb(self):
         return self.farbsensor.rgb()
+
+    def get_tages_rgb(self):
+        global tagesrgb
+        tagesrgb = self.farbsensor.rgb()
 
 class Gyroskop:
     def __init__(self):

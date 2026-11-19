@@ -2,6 +2,8 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import sensor
 import motor
+from pybricks.tools import wait, StopWatch, DataLog
+
 
 class Roboter:
     GRUND_GESCHWINDIGKEIT = 600
@@ -36,7 +38,6 @@ class Roboter:
                 self.drehen()
                 continue
 
-            korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
             korrektur = max(0.5, min(1.5, korrektur))
 
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
@@ -52,6 +53,10 @@ class Roboter:
             wait(10)
             angle = self.gyroskop.get_angle()
         self.motoren.beide_stop()
+        self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
+        wait(self.GERADAUS_NACH_DREHUNG_MSEC)
+        self.motoren.beide_stop()
+
         self.motoren.gerade_fahren(self.GRUND_GESCHWINDIGKEIT)
         wait(self.GERADAUS_NACH_DREHUNG_MSEC)
         self.motoren.beide_stop()

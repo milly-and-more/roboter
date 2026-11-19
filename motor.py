@@ -1,6 +1,8 @@
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
 from pybricks.parameters import Port, Stop, Direction, Button, Color
+from pybricks.tools import wait, StopWatch, DataLog
+
 
 class Motoren:
     def __init__(self):
@@ -29,3 +31,8 @@ class Motoren:
 class MotorMarkierung:
     def __init__(self):
         self.motor = Motor(Port.C)
+
+    def abwurf(self):
+        self.motor(500)
+        wait(2000)
+        self.motor.stop()

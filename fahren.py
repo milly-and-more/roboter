@@ -9,13 +9,13 @@ x = bool(True)
         motor_links.run(600)           #Fahrtkorrektur ergänzen
         motor_rechts.run(600)
         F = sensor_farbe.rgb()
-        rs =                           #Werte für schwarz ergänzen
-        gs = 
-        bs = 
+        rs = 1                          #Werte für schwarz ergänzen
+        gs = 4
+        bs = 1
         while ([F0]>rs or [F1]>gs or [F2]>bs ):
             pass
         else:
-            x = bool(false)
+            x = bool(False)
             break
     else:
         motor_links.Stop
