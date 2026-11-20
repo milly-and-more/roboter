@@ -26,9 +26,16 @@ class Roboter:
     def start(self):
         while not self.touchsensor.pressed():
             wait(1)
-        self.drehen("rechts")
+        if self.ultraschall.distanz_wand_kontrolle() > 250:
+            self.drehen("links")
+            print("1. ja")
+        else:
+            self.drehen("rechts")
+            print("2. nein")
+        self.bewegen()
 
-
+        
+    
     def bewegen(self):
         while(True):
             #kontrolle ziel
@@ -46,14 +53,14 @@ class Roboter:
             elif wand_abstand > 250:
                 self.ritturns = 0
                 self.motoren.beide_stop()
-                self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 250)
+                self.motoren.fahren_gerade_degree(self.GRUND_GESCHWINDIGKEIT, 280)
                 self.motoren.beide_stop()
                 self.drehen()
                 return
             self.ritturns = 0
             korrektur = 1 + wand_abstand / self.ultraschall.PERFEKTE_DISTANZ
+            korrektur = max(0.6, min(1.4, korrektur))
             print("korrektur:", korrektur)
-            korrektur = max(0.7, min(1.3, korrektur))
             rechte_geschwindigkeit = int(self.GRUND_GESCHWINDIGKEIT * korrektur)
             self.motoren.korrigierendes_fahren(self.GRUND_GESCHWINDIGKEIT, rechte_geschwindigkeit)
                 
